@@ -6,7 +6,7 @@ void statNumber_iterative(int n){
 	
 	len = log10(n);
 	m = len;
-	sprintf(d,"%d",n);
+	sprintf(d,"%d",n);		//what does this mean?
 	k = 0;
 	h =d[k] - '0';
 	n %=pow10[len];
@@ -42,7 +42,7 @@ void statNumber_iterative(int n){
 		count[0] -= pow10[i];
 	}
 	for(i=0;i<10;i++){
-		printf("%d/n",count[i]);
+		printf("count[%d]=%d\n",i,count[i]);
 	}
 }
 
