@@ -21,7 +21,9 @@ begin
 	{greedy }
 	for i:=1 to n do 
 	begin 
-	if 
+	if c[d[i]] = false then 
+		c[d[i]] := true;
+		now 
 	
 	end;
 		  
