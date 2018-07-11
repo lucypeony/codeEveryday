@@ -1,9 +1,7 @@
 /*
 lucypeony@hotmail.com
-
 poj 3421 :X-factor chains
-x <=220. 
-
+x <=220.
 1,get the prime factorilization of x: p1^m1 *p2^m2 *... ... * pn^mn
 2, the longest list equals m1+m2+... ... +mn
 3, the number of longest lists equals: (m1+m2+... ...+mn)! / (m1!)(m2!)...(mn!).
@@ -15,20 +13,21 @@ x <=220.
 */
 #include<iostream>
 #include<fstream>
-using namespace std; 
+using namespace std;
 
-int primes[220], nums[220],total;
+int primes[220], nums[220], total=0;
 /*
-There are 25 primes under 220. 
+There are 25 primes under 220.
 */
 void generate_primes(int n) {
-	bool t[220];
+	bool t[220] = { 0 };
 	for (int i = 3; i*i < n; i += 2)
 		if (!t[i])
 			for (int j = i * i; j < n; j += 2 * i)
 				t[j] = 1;
-	primes[++total] = 2;
-	for(int i=3;i<n;i+=2)
+	total++;
+	primes[total] = 2;
+	for (int i = 3; i<n; i += 2)
 		if (!t[i])
 		{
 			primes[++total] = i;
@@ -37,7 +36,7 @@ void generate_primes(int n) {
 
 long long factorials[20];
 void generate_factorials() {
-	memset(factorials, 1, sizeof(factorials));
+	factorials[0] = 1;
 	factorials[1] = 1;
 	for (int i = 2; i <= 20; i++) {
 		factorials[i] = factorials[i - 1] * i;
@@ -45,23 +44,22 @@ void generate_factorials() {
 }
 
 int main() {
-	//ofstream cout("poj3421.txt");
+	freopen("poj3421.out","w",stdout);
 	int n;
 	//cin >> n; 
-	n = 100;
-	cout << "Hello 50";
+	n = 220;
 	generate_primes(n);
-	
+
 	long long ans;
 	int i = 1;
 
 	int ans_1 = 0;
 	while (n > 1) {
-		while (n%primes[i]) {
+		while (n%primes[i]==0) {
 			n /= primes[i];
 			nums[i]++;
 		}
-		ans_1+=nums[i];
+		ans_1 += nums[i];
 		i++;
 	}
 
@@ -69,12 +67,9 @@ int main() {
 	ans = factorials[ans_1];
 	for (int j = 1; j <= i; j++) {
 		ans /= factorials[nums[j]];
-		cout << primes[j] << " " << nums[j] << endl;
 	}
-	cout << ans;
-	cout << "Hello " << endl;
-	cout << "hello" << endl;
-	//cout.close();
+	cout << ans_1<<" "<<ans;
+	fclose(stdout);
 	return 0;
-	
+
 }
